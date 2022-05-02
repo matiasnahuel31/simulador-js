@@ -1,6 +1,5 @@
 let nombre = prompt("Ingrese su nombre");
-let opcion,capping,acrilicas,esculpidas;
-let resultadoF = 0;
+let opcion;
 let existe2 = 0;
 let vendio = 0;
 const dias = ["LUNES","MARTES","MIERCOLES", "JUEVES","VIERNES"];
