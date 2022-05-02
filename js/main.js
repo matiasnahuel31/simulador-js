@@ -1,25 +1,40 @@
 let nombre = prompt("Ingrese su nombre");
 let opcion,capping,acrilicas,esculpidas;
-let acumular = 0;
 let resultadoF = 0;
-let descuento = 0;
 let existe2 = 0;
+let vendio = 0;
 const dias = ["LUNES","MARTES","MIERCOLES", "JUEVES","VIERNES"];
-capping = 500; acrilicas = 700; esculpidas = 300;
 
 alert(`Bienvenido ${nombre} a Lala Nails!`);
 
-function calcular(resultado,desc){
+class Unias {
 
-    resultado = acumular + (acumular*0.21);
+    constructor( servicio,precio){
 
-    if(desc >= 3){
-
-        resultado = resultado - (resultado*0.15);
+        this.servicio = servicio;
+        this.precio = parseFloat(precio);
     }
-    
-    return resultado;
+
+    calcular_iva(){
+
+        this.precio = this.precio + (this.precio * 0.21);
+    }
+
+
 }
+
+
+// function calcular(resultado,desc){
+
+//     resultado = acumular + (acumular*0.21);
+
+//     if(desc >= 3){
+
+//         resultado = resultado - (resultado*0.15);
+//     }
+    
+//     return resultado;
+// }
 
 function comprobarDia(existe){
     
@@ -51,36 +66,61 @@ function comprobarDia(existe){
 
 }
 
+const esculpidasN1 = new Unias("Uñas Esculpidas N 1 y 2", 1400);
+const esculpidasN3 = new Unias("Uñas Esculpidas N 3 y 4", 1600);
+const esculpidasN5 = new Unias("Uñas Esculpidas N 5 y 6", 1800);
+const cappingGel = new Unias("Capping Gel", 1000);
+const esmaltadoSP = new Unias("Esmaltado Semi Permanente", 800);
+
+
 let diaHabil = prompt("Elija el dia que quiere reservar su turno (trabajamos solo de lunes a viernes)\nRECUERDE INGRESAR EL DIA SOLO EN MAYUSCULAS");
 comprobarDia(existe2);
 
 
-alert("Ingrese el numero del tipo de servicio que quiere realizarse, recuerde que si compra 3 servicios o mas se realizara un descuento del 15%");
-opcion = parseInt(prompt("1- Capping $500\n2-Acrilicas $700\n3-Esculpidas $300\n4-Salir"));
+alert("Ingrese el numero del tipo de servicio que quiere realizarse\nN = numero de largo de las uñas");
+opcion = parseInt(prompt("UÑAS ESCULPIDAS\n 1- N 1 y 2 | $1400\n 2- N 3 y 4 | $1600\n 3- N 5 y 6 | $1800\n4- CAPPING GEL | $1000\n5- ESMALTADO SEMI PERMANENTE | $800\n6- SALIR"));
+
+
 
 do{
     switch (opcion) {
 
         case 1:
             alert("Gracias por tu compra");
-            descuento++;
-            acumular = acumular + capping;
-            calcular(resultadoF,descuento);
+            vendio = 1;
+            esculpidasN1.calcular_iva()
+            alert(`El precio final a abonar + iva incluido es de $${esculpidasN1.precio}\nlo esperamos este ${dias[existe2]}`);
             break;
+
         case 2:
             alert("Gracias por tu compra");
-            acumular = acumular + acrilicas;
-            calcular(resultadoF,descuento);
-            descuento++;
+            esculpidasN3.calcular_iva()
+            alert(`El precio final a abonar + iva incluido es de $${esculpidasN3.precio}\nlo esperamos este ${dias[existe2]}`);
+            vendio = 1;
             break;
+
         case 3:
             alert("Gracias por tu compra");
-            acumular = acumular + esculpidas;
-            calcular(resultadoF,descuento);
-            descuento++;
+            esculpidasN5.calcular_iva()
+            alert(`El precio final a abonar + iva incluido es de $${esculpidasN5.precio}\nlo esperamos este ${dias[existe2]}`);
+            vendio = 1;
             break;
 
         case 4:
+            alert("Gracias por tu compra");
+            cappingGel.calcular_iva()
+            alert(`El precio final a abonar + iva incluido es de $${cappingGel.precio}\nlo esperamos este ${dias[existe2]}`);
+
+            vendio = 1;
+            break;
+        case 5:
+            alert("Gracias por tu compra");
+            esmaltadoSP.calcular_iva()
+            alert(`El precio final a abonar + iva incluido es de $${esmaltadoSP.precio}\nlo esperamos este ${dias[existe2]}`);
+            vendio = 1;
+            break;
+        case 6:
+            vendio = 1;
             break;
 
         default:
@@ -88,14 +128,11 @@ do{
             break;
 
     }
-    if(opcion != 4){
-    opcion = parseInt(prompt("1- Capping $500\n2-Acrilicas $700\n3-Esculpidas $300\n4-Salir"));
+    if(opcion != 6 && vendio == 0 ){
+    opcion = parseInt(prompt("UÑAS ESCULPIDAS\n 1- N 1 y 2 | $1400\n 2- N 3 y 4 | $1600\n 3- N 5 y 6 | $1800\n4- CAPPING GEL | $1000\n5- ESMALTADO SEMI PERMANENTE | $800\n6- SALIR"));
     }
-    if(opcion == 4){
-        alert("gracias por elegirnos!");
+    if(opcion == 6){
+        alert("hasta luego!");
     }
     
-} while (opcion != 4);
-
-alert(`El precio final a abonar + iva incluido y descuentos es de $${calcular(resultadoF,descuento)}\nlo esperamos este ${dias[existe2]}`);
-
+} while ( vendio != 1  );
