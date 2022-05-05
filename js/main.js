@@ -3,6 +3,7 @@ let opcion;
 let existe2 = 0;
 let vendio = 0;
 const dias = ["LUNES","MARTES","MIERCOLES", "JUEVES","VIERNES"];
+let mensaje = document.getElementById("reserva");
 
 alert(`Bienvenido ${nombre} a Lala Nails!`);
 
@@ -88,34 +89,35 @@ do{
             alert("Gracias por tu compra");
             vendio = 1;
             esculpidasN1.calcular_iva()
-            alert(`El precio final a abonar + iva incluido es de $${esculpidasN1.precio}\nlo esperamos este ${dias[existe2]}`);
+            // alert(`El precio final a abonar + iva incluido es de $${esculpidasN1.precio}\nlo esperamos este ${dias[existe2]}`);
+            mensaje.innerHTML = `<h2> <br> ${nombre.toUpperCase()} tu reserva quedo agendada para el proximo ${dias[existe2]} </h2> <br> <h3> Monto a abonar $${esculpidasN1.precio} ARS </h3>`;
             break;
 
         case 2:
             alert("Gracias por tu compra");
             esculpidasN3.calcular_iva()
-            alert(`El precio final a abonar + iva incluido es de $${esculpidasN3.precio}\nlo esperamos este ${dias[existe2]}`);
+            mensaje.innerHTML = `<h2> <br> ${nombre.toUpperCase()} tu reserva quedo agendada para el proximo ${dias[existe2]} </h2> <br> <h3> Monto a abonar $${esculpidasN3.precio} ARS </h3>`;
             vendio = 1;
             break;
 
         case 3:
             alert("Gracias por tu compra");
             esculpidasN5.calcular_iva()
-            alert(`El precio final a abonar + iva incluido es de $${esculpidasN5.precio}\nlo esperamos este ${dias[existe2]}`);
+            mensaje.innerHTML = `<h2> <br> ${nombre.toUpperCase()} tu reserva quedo agendada para el proximo ${dias[existe2]} </h2> <br> <h3> Monto a abonar $${esculpidasN5.precio} ARS </h3>`;
             vendio = 1;
             break;
 
         case 4:
             alert("Gracias por tu compra");
             cappingGel.calcular_iva()
-            alert(`El precio final a abonar + iva incluido es de $${cappingGel.precio}\nlo esperamos este ${dias[existe2]}`);
+            mensaje.innerHTML = `<h2> <br> ${nombre.toUpperCase()} tu reserva quedo agendada para el proximo ${dias[existe2]} </h2> <br> <h3> Monto a abonar $${cappingGel.precio} ARS </h3>`;
 
             vendio = 1;
             break;
         case 5:
             alert("Gracias por tu compra");
             esmaltadoSP.calcular_iva()
-            alert(`El precio final a abonar + iva incluido es de $${esmaltadoSP.precio}\nlo esperamos este ${dias[existe2]}`);
+            mensaje.innerHTML = `<h2> <br> ${nombre.toUpperCase()} tu reserva quedo agendada para el proximo ${dias[existe2]} </h2> <br> <h3> Monto a abonar $${esmaltadoSP.precio} ARS </h3>`;
             vendio = 1;
             break;
         case 6:
@@ -131,7 +133,10 @@ do{
     opcion = parseInt(prompt("UÑAS ESCULPIDAS\n 1- N 1 y 2 | $1400\n 2- N 3 y 4 | $1600\n 3- N 5 y 6 | $1800\n4- CAPPING GEL | $1000\n5- ESMALTADO SEMI PERMANENTE | $800\n6- SALIR"));
     }
     if(opcion == 6){
-        alert("hasta luego!");
+        mensaje.innerHTML = ("<h2>Hasta Luego!</h2>");
     }
     
 } while ( vendio != 1  );
+
+
+
