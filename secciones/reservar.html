@@ -12,13 +12,15 @@
             <ul>
                 <li><a href="../index.html">Inicio</a></li>
                 <li> <a href="reservar.html">Contacto</a></li>
+                <li> <a href="turnos.html">Turnos</a></li>
+                
             </ul>
         </nav>
     </header>
     
     <center><h1>Contacto</h1></center>
 
-    <form id="form">
+    <form id="form" action="turnos.html">
         <center>
         <input type="text" id = "nombre" placeholder="Escriba su Nombre"><br><br>
 
@@ -28,23 +30,23 @@
 
         <br>
 
-        <!-- <p><select name="dia">
-            <option value="lunes" id="lunes">LUNES</option>
-            <option value="martes" id="martes">MARTES</option>
-            <option value="miercoles" id="miercoles">MIERCOLES</option>
-            <option value="jueves" id="jueves">JUEVES</option>
-            <option value="viernes"id="viernes">VIERNES</option>
+        <p><select id="dias">
+            <option value="LUNES" id="lunes">LUNES</option>
+            <option value="MARTES" id="martes">MARTES</option>
+            <option value="MIERCOLES" id="miercoles">MIERCOLES</option>
+            <option value="JUEVES" id="jueves">JUEVES</option>
+            <option value="VIERNES"id="viernes">VIERNES</option>
           </select></p>
 
         <br>
 
-        <p><select name="precios">
-            <option value="n1" id="opcion1">Uñas Esculpidas N1 Y 2 $1400</option>
-            <option value="n3" id="opcion2">Uñas Esculpidas N3 Y 4 $1600 </option>
-            <option value="n5" id="opcion3">Uñas Esculpidas N5 Y N6 $1800</option>
-            <option value="capping" id="opcion4">Capping Gel $1000</option>
-            <option value="esmaltado" id="opcion5">Esmaltado Semi Permanente $800</option>
-          </select></p> -->
+        <p><select id="precios">
+            <option value="Uñas Esculpidas N1 Y 2 $1400" id="opcion1">Uñas Esculpidas N1 Y 2 $1400</option>
+            <option value="Uñas Esculpidas N3 Y 4 $1600" id="opcion2">Uñas Esculpidas N3 Y 4 $1600 </option>
+            <option value="Uñas Esculpidas N5 Y N6 $1800" id="opcion3">Uñas Esculpidas N5 Y N6 $1800</option>
+            <option value="Capping Gel $1000" id="opcion4">Capping Gel $1000</option>
+            <option value="Esmaltado Semi Permanente $800" id="opcion5">Esmaltado Semi Permanente $800</option>
+          </select></p>
 
 
         <textarea name="mensaje" id="mensaje" cols="30" rows="10" placeholder="Escriba su mensaje"></textarea><br><br>
@@ -55,4 +57,4 @@
 
     <script src="../js/contacto.js"></script>
 </body>
-</html>l
+</html>
