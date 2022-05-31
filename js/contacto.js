@@ -5,7 +5,7 @@ let arrayPrecios = [{precios: "Uñas Esculpidas N1 Y 2 $1400"}, {precios: "Uñas
 
 let preciosJSON = JSON.stringify(arrayPrecios)
 let boton = document.getElementById("btnReservar");
-
+let cargar = document.getElementById('btnJSON').addEventListener('click', cargarJson);
 localStorage.setItem("listaPrecios", preciosJSON)
 
 form.addEventListener("submit",(event) =>{
@@ -30,12 +30,12 @@ form.addEventListener("submit",(event) =>{
     
     
 
-    //    let name = localStorage.getItem('nombres');
-    //    let ape = localStorage.getItem('apellidos');
-    //    let mail = localStorage.getItem('gmails');
-    //    let msg = localStorage.getItem('mensajes');
-    //    let day = localStorage.getItem('dia');
-    //    let pre = localStorage.getItem('valor');
+        // let name = localStorage.getItem('nombres');
+        // let ape = localStorage.getItem('apellidos');
+        // let mail = localStorage.getItem('gmails');
+        // let msg = localStorage.getItem('mensajes');
+        // let day = localStorage.getItem('dia');
+        // let pre = localStorage.getItem('valor');
 
     //   console.log(name)
     //    console.log(ape)
@@ -61,3 +61,25 @@ function mostrarAlerta(){
 
 
 }
+
+
+function cargarJson(){
+
+  fetch('/datos.json')
+    .then(function(res) {
+        return res.json();
+    })
+    .then(function(data){
+      let html = '';
+      data.forEach(function(contacto){
+        html += `<li>${contacto.nombre} ${contacto.email} ${contacto.numero}<li>
+        `;
+
+      })
+      document.getElementById('resultado').innerHTML = html;
+
+    })
+
+   
+}
+
