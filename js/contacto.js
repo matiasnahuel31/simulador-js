@@ -72,8 +72,11 @@ function cargarJson(){
     .then(function(data){
       let html = '';
       data.forEach(function(contacto){
-        html += `<li>${contacto.nombre} ${contacto.email} ${contacto.numero}<li>
+        html += `<br>Profesional <br><li>${contacto.nombre}<br><li> ${contacto.email}<br> <li>${contacto.numero}
         `;
+        document.body.style.color = 'white';
+        document.body.style.fontFamily = 'Plus Jakarta Sans';
+
 
       })
       document.getElementById('resultado').innerHTML = html;
