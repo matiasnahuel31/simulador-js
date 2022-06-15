@@ -1,88 +1,150 @@
-let form = document.getElementById("form")
-
-
-let arrayPrecios = [{precios: "Uñas Esculpidas N1 Y 2 $1400"}, {precios: "Uñas Esculpidas N3 Y 4 $1600"}, {precios: "Uñas Esculpidas N5 Y N6 $1800"}, {precios: "Capping Gel $1000"}, {precios: "Esmaltado Semi Permanente $800"}]
-
-let preciosJSON = JSON.stringify(arrayPrecios)
-let boton = document.getElementById("btnReservar");
-let cargar = document.getElementById('btnJSON').addEventListener('click', cargarJson);
-localStorage.setItem("listaPrecios", preciosJSON)
-
-form.addEventListener("submit",(event) =>{
-     event.preventDefault()
-    // const object = {nombre: document.getElementById("nombre").value, apellido: document.getElementById("apellido").value, gmail: document.getElementById("email").value,consulta: document.getElementById("mensaje").value, dias: document.querySelector("#dias").value,precio: document.querySelector("#precios").value}
-    let nombre = document.getElementById("nombre").value
-    let apellido = document.getElementById("apellido").value
-    let gmail = document.getElementById("email").value
-    let consulta = document.getElementById("mensaje").value
-    let dias = document.querySelector("#dias").value
-    let precio = document.querySelector("#precios").value
+$(document).ready(function(){
     
+  const guardarConsulta = [];
+  const guardarReserva = [];
+  const guardarDiaHora = [];
+  const URLJSON = '/datos.json';
+  
+  escribirServicio();                        
+  detalles();                               
+  
+  
+  $("#diaHora").flatpickr({
+      inline:true,
+      enableTime: true,
+      minTime: "09:00",
+      maxTime: "17:00",
+      minDate: "today",
+      dateFormat: "j F, Y - H:i",
+      "disable": [
+          function(date) {
 
-    
-    localStorage.setItem('nombres', nombre);
-    localStorage.setItem('apellidos', apellido);
-    localStorage.setItem('gmails', gmail);
-    localStorage.setItem('mensajes', consulta);
-    localStorage.setItem('dia', dias);
-    localStorage.setItem('valor', precio);
+              return (date.getDay() === 0 || date.getDay() === 7);
+  
+          }
+      ],
+      locale: {
+          firstDayOfWeek: 1,
+          weekdays: {
+            shorthand: ['Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa'],
+            longhand: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],         
+          }, 
+          months: {
+            shorthand: ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Оct', 'Nov', 'Dic'],
+            longhand: ['Enero', 'Febreo', 'Мarzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+          },
+      }
+  });
+  
 
-    
-    
+  function escribirServicio() {
+      $("select").append(() => {
+      $.getJSON(URLJSON, function (respuesta, estado) { 
+          if (estado === "success") {
+              let misDatos = respuesta;
+              for (i = 0; i < misDatos[0].serviciosunas.length; i++) {
+                  $("#selectServi").append(`<option>${misDatos[0].serviciosunas[i]}</option>`);
+                  }
+              }
+          });
+          });
+  };
+  
+  
 
-        // let name = localStorage.getItem('nombres');
-        // let ape = localStorage.getItem('apellidos');
-        // let mail = localStorage.getItem('gmails');
-        // let msg = localStorage.getItem('mensajes');
-        // let day = localStorage.getItem('dia');
-        // let pre = localStorage.getItem('valor');
+  $("#btnCalend").click((event) => {
+      let diaHora = $(".flatpickr").val();
+      localStorage.setItem("turno", diaHora);
+      guardarDiaHora.push({turno: diaHora});
+      $(location).attr('href','turnos.html');
+      event.preventDefault();
+  });
+  
 
-    //   console.log(name)
-    //    console.log(ape)
-    //    console.log(mail)
-    //    console.log(msg)
-    //    console.log(day)
-    //    console.log(pre)
-})
+  function detalles() {
+      $("#detalleReserv").append(`<div class="containerDet">
+                                      <div class="divDetalle">
+                                          <h6><u>Profesional</u></h6>
+                                          <p>Laura Garcia</p>
+                                      </div>
+                                      <div class="divDetalle">
+                                          <h6><u>Forma de pago</u></h6>
+                                          <p>Efectivo o Débito</p>
+                                      </div>
+                                      <div class="divDetalle">
+                                          <h6><u>Día y Hora</u></h6>
+                                          <p>${localStorage.getItem("turno")}</p>
+                                      </div>
+                                      <div class="divDetalle">
+                                          <h6><u>Ubicación</u></h6>
+                                          <p>Estomba 3449</p>
+                                      </div>
+                                  </div>`);
+  };
+  
+  
 
-
-function mostrarAlerta(){
-
-      Swal.fire({
-        title: 'Reserva completada!',
-        text: 'En la seccion turnos podras encontrar tu turno con la fecha y servicio elegido!',
-        icon: 'success',
-        allowOutsideClick: false,
-        allowEscapeKey: false,
-        allowEnterKey: false,
-        stopKeydownPropagation: false
+  $("#btnConsul").click((event) => {
+      event.preventDefault();
+      let nom = $("#nomb").val();
+      let ape = $("#apell").val();
+      let correo = $("#correo").val();
+      let texto = $("#text").val();
+      guardarConsulta.push({nombre: nom, apellido: ape, email: correo, mensaje: texto});
+      $.ajax({
+          method: "POST",
+          url: "https://jsonplaceholder.typicode.com/posts",
+          type: "POST",
+          contentType: "application/json",
+          data: JSON.stringify(guardarConsulta),
       })
-
-
-
-}
-
-
-function cargarJson(){
-
-  fetch('/datos.json')
-    .then(function(res) {
-        return res.json();
-    })
-    .then(function(data){
-      let html = '';
-      data.forEach(function(contacto){
-        html += `<br>Profesional <br><li>${contacto.nombre}<br><li> ${contacto.email}<br> <li>${contacto.numero}
-        `;
-        document.body.style.color = 'white';
-        document.body.style.fontFamily = 'Plus Jakarta Sans';
-
-
+          .done(function(msg) {
+              Swal.fire({
+                  icon: 'success',
+                  title: 'Consulta enviada!',
+                })
+          })
+          .fail(function() {
+              Swal.fire({
+                  icon: 'error',
+                  title: 'Ocurrió un error',
+                })
+          })
+      console.log(guardarConsulta);
+      $("#formulario").trigger("reset");
+  });
+      
+  
+  
+  $("#btnReserva").click((event) => {
+      event.preventDefault();
+      let nomApe = $("#nombApell").val();
+      let numCel = $("#numCel").val();
+      let correo = $("#correo").val();
+      let servi = $("#selectServi").val();
+      let texto = $("#text").val();
+      guardarReserva.push({nombre: nomApe, celular: numCel, email: correo, servicio: servi, mensaje: texto});
+      $.ajax({
+          method: "POST",
+          url: "https://jsonplaceholder.typicode.com/posts",
+          type: "POST",
+          contentType: "application/json",
+          data: JSON.stringify(guardarReserva),
       })
-      document.getElementById('resultado').innerHTML = html;
-
-    })
-
-   
-}
-
+          .done(function(msg) {
+              Swal.fire({
+                  icon: 'success',
+                  title: 'Reserva confirmada!',
+                })
+          })
+          .fail(function() {
+              Swal.fire({
+                  icon: 'error',
+                  title: 'Ocurrió un error',
+                })
+          })
+      console.log(guardarReserva);
+      $("#formulario").trigger("reset");
+  });
+  
+  });

@@ -4,79 +4,104 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/material_red.css">
     <link rel="stylesheet" href="../estilos/style.css">
     <title>Contacto</title>
 </head>
+
+
 <body>
     <header>
         <nav>
             <div>
-                <a href="index.html"><img src="../imagenes/logo.png" class="logo" alt="Lala Nails"> </a>
+                <a href="../index.html"><img src="../imagenes/logo.png" class="logo" alt="Lala Nails"> </a>
             </div>
             <ul>
                 <li><a class="line" href="../index.html">Inicio</a></li>
                 <li> <a class="line" href="">Diseños</a></li>
-                <li> <a class="line" href="turnos.html">Turnos</a></li>
+                <li> <a class="line" href="">Promociones</a></li>
                 <li> <a class="line" href="reservar.html">Contacto</a></li>
                 <li> <a class="line" href="">Nosotros</a></li>
                 
             </ul>
         </nav>
     </header>
-    <main class="main">
-    <center><h1 class="tituloC">CONTACTO</h1></center>
-
-    <form id="form" action="turnos.html">
-        <center>
-        <input type="text" id = "nombre" placeholder="Escriba su Nombre"><br><br>
-
-        <input type="text" id = "apellido" placeholder="Escriba su Apellido"><br><br>
-
-        <input type="email" id = "email" placeholder="Escriba su Email" ><br><br>
-
-        <br>
-
-        <p><select id="dias">
-            <option value="LUNES" id="lunes">LUNES</option>
-            <option value="MARTES" id="martes">MARTES</option>
-            <option value="MIERCOLES" id="miercoles">MIERCOLES</option>
-            <option value="JUEVES" id="jueves">JUEVES</option>
-            <option value="VIERNES"id="viernes">VIERNES</option>
-          </select></p>
-
-        <br>
-
-        <p><select id="precios">
-            <option value="Uñas Esculpidas N1 Y 2 $1400" id="opcion1">Uñas Esculpidas N1 Y 2 $1400</option>
-            <option value="Uñas Esculpidas N3 Y 4 $1600" id="opcion2">Uñas Esculpidas N3 Y 4 $1600 </option>
-            <option value="Uñas Esculpidas N5 Y N6 $1800" id="opcion3">Uñas Esculpidas N5 Y N6 $1800</option>
-            <option value="Capping Gel $1000" id="opcion4">Capping Gel $1000</option>
-            <option value="Esmaltado Semi Permanente $800" id="opcion5">Esmaltado Semi Permanente $800</option>
-          </select></p>
-
-
-        <textarea name="mensaje" id="mensaje" cols="30" rows="10" placeholder="Escriba su mensaje"></textarea><br><br>
-        <button id = "btnReservar" type="submit" onclick="mostrarAlerta()">Reservar</button>
-        <button id = "btnCancelar" type="reset" >Cancelar</button>
-        </center>
-    </form>
-    <button id = "btnJSON" class="boton">Datos</button>
-    <div id="resultado"></div>
-    </main>
-
-    <footer>
-        <div class="linea2"></div>
-        <div class="redes">
-            <a href="https://www.instagram.com" alt="Instagram" class="red"></a>
-            <a href="https://www.facebook.com" alt="Facebook" class="red"></a>
-            <a href="https://twitter.com" alt="Twitter" class="red"></a> </li>
-            <a href="https://twitter.com" alt="Gmail" class="red"></a> </li>
+        <!--Título de la página Contacto-->
+        <div class="tituloPrincipal">
+            <h6>Contacto</h6>
         </div>
-        <span class="copyright">&copy;2022, Lala Nails. Todos los derechos reservados.</span>
-    </footer>
+        <div class="d-flex justify-content-evenly modifContenido"> <!--Div para modificar el contenido de la página-->
+            <div>
+                <div>
+                    <h6>Reserve una visita</h6>
+                </div>
+                <div id="calendario" class="d-flex modifCalendario"> <!--Calendario para seleccionar un turno-->
+                    <input id="diaHora" class="flatpickr flatpickr-input" type="text" placeholder="Seleccione una fecha y un horario..." readonly="readonly">
+                    <button id="btnCalend" class="button btn-danger" type="submit">Confirmar</button>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <h6>Dejenos su consulta</h6> <!--Comienzo del formulario para realizar una consulta médica-->
+                </div>
+                <form  id="formulario">
+                    <div class="field">
+                        <label class="label">Nombre</label>
+                        <div class="control">
+                            <input id="nomb" class="input" type="text">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Apellido</label>
+                        <div class="control">
+                            <input id="apell" class="input" type="text">
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label class="label">Email</label>
+                        <div class="control">
+                            <input id="correo" class="input" type="email" placeholder="ejemplo@gmail.com">
+                        </div>
+                    </div>         
+                    <div class="field">
+                        <label class="label">Mensaje</label>
+                        <div class="control">
+                            <textarea id="text" class="textarea" placeholder="Detalle su consulta"></textarea>
+                        </div>
+                    </div>            
+                    <div class="field is-grouped">
+                        <div class="control">
+                            <button id="btnConsul" class="button btn-danger" type="submit">Enviar</button>
+                        </div>
+                        <div class="control">
+                            <button class="button is-light">Cancelar</button>
+                        </div>
+                    </div>
+                </form>           
+            </div>
+        </div>
+        <div class="d-flex justify-content-center modifMapa"> <!--Ubicación del establecimiento-->
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3277.8262996068547!2d-58.580826984171225!3d-34.75996817329049!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bcc50cc17ecfef%3A0xdb9a23e33d4ba2fb!2sCnel.%20Estomba%203449%2C%20B1757MJC%20Gregorio%20de%20Laferrere%2C%20Provincia%20de%20Buenos%20Aires!5e0!3m2!1ses-419!2sar!4v1655248716050!5m2!1ses-419!2sar" width="1000" height="250" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+        <footer>
+            <div class="linea2"></div>
+            <div class="redes">
+                <a href="https://www.instagram.com" alt="Instagram" class="red"></a>
+                <a href="https://www.facebook.com" alt="Facebook" class="red"></a>
+                <a href="https://twitter.com" alt="Twitter" class="red"></a> </li>
+                <a href="https://twitter.com" alt="Gmail" class="red"></a> </li>
+            </div>
+            <span class="copyright">&copy;2022, Lala Nails. Todos los derechos reservados.</span>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+        <script src="../js/contacto.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.16/dist/sweetalert2.all.min.js"></script>
 
-
-    <script src="../js/contacto.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.16/dist/sweetalert2.all.min.js"></script>
-</body>
-</html>
+    </body>
+    </html>
+    

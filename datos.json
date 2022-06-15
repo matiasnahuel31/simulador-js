@@ -1,10 +1,15 @@
 [
     {
-        "nombre" : "Laura Garcia",
-        "email" : "laura.garcia021@gmail.com",
-        "numero" : "11-2345-6744"
+        "serviciosunas": [
+            "Uñas Esculpidas N1 Y 2 $1400",
+            "Uñas Esculpidas N3 Y 4 $1600",
+            "Uñas Esculpidas N5 Y N6 $1800",
+            "Capping Gel $1000",
+            "Esmaltado Semi Permanente $800",
+            "Service  N1 Y 2 $1200",
+            "Service  N3 Y 4 $1400",
+            "Service  N5 Y 6 $1600"
+        ]
     }
-
-
 
 ]
